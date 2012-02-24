@@ -1,0 +1,155 @@
+﻿@using Quartz
+@using QuartzMaster.Base.Helpers
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html class="ie ie6 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 no-js" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<!--[if lt IE 9]>
+<script src="@Url.Content("~/Scripts/html5.js")"></script>
+<![endif]-->
+<!-- the "no-js" class is for Modernizr. -->
+<head>
+    <meta charset="utf-8" />
+    @Html.MetaAcceptLanguage()
+    <meta name="description" content="Quartz Master - Remote dashboard for Quartz.Net" />
+    <link rel="shortcut icon" href="@Url.Content("~/Content/images/favicon.ico")"/>
+    <title>@ViewBag.Title</title>
+    @*<link href="@Url.Content("~/css/Html5Reset.css")" rel="stylesheet"/>*@
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet"/>
+    <link id="jquery-ui-css" href="@Url.Content("~/Content/Themes/Base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <link id="localized-css" href="@Url.Content("~/css/ltr-content.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.17.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-i18n.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-datetimepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-datetimepicker-i18n.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/DataTables-1.9.0/media/js/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/modernizr-2.0.6.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.globalize/globalize.js")" type="text/javascript"></script>
+    <script src='@Url.Content("~/Scripts/jquery.globalize/cultures/globalize.culture." + System.Threading.Thread.CurrentThread.CurrentUICulture.ToString() + ".js")' type="text/javascript"></script>
+    <script type="text/javascript">
+
+        function initDatepickers() {
+            if (!Modernizr.inputtypes.date) {
+                if (Globalize.culture().name != "en" && Globalize.culture().name.substr(0, 2) != "en") {
+                    $.datepicker.setDefaults($.datepicker.regional[Globalize.culture().name.substr(0, 2)]);
+                    $.timepicker.setDefaults($.timepicker.regional[Globalize.culture().name.substr(0, 2)]);
+                }
+                else {
+                    $.datepicker.setDefaults($.datepicker.regional['']);
+                    $.timepicker.setDefaults($.timepicker.regional['']);
+                }
+
+                $("input[type='date']").datepicker();
+            }
+
+            if (!Modernizr.inputtypes.datetime) {
+                $("input.datetime").datetimepicker();
+            }
+        }
+
+        function initGlobalization() {
+            var lang = $("meta[name='accept-language']").attr("content");
+            Globalize.culture(lang);
+
+            $.validator.methods.number = function (value, element) {
+                if (Globalize.parseFloat(value)) {
+                    return true;
+                }
+                return false;
+            }
+
+            //dynamically switch css to RTL version
+            if (Globalize.cultures[Globalize.culture().name].isRTL === true) {
+                var targetCssLink = $('#jquery-ui-css');
+                var targetDatatableCssLink = $('#datatable-css');
+                var targetLocalizedCssLink = $('#localized-css');
+
+                targetCssLink.attr('href', targetCssLink.attr('href').replace("-ui", "-ui-rtl"));
+                targetDatatableCssLink.attr('href', targetDatatableCssLink.attr('href').replace("DataTable.css", "DataTable-rtl.css"));
+                targetLocalizedCssLink.attr('href', targetLocalizedCssLink.attr('href').replace("ltr-content.css", "rtl-content.css"));
+
+                $('body').css('direction', 'rtl');
+            }
+            else {
+                $('body').css('direction', 'ltr');
+            }
+
+            jQuery.extend(jQuery.validator.methods, {
+                range: function (value, element, param) {
+                    //use the Globalization plugin to parse the value
+                    var val = Globalize.parseFloat(value);
+                    return this.optional(element) || (val >= param[0] && val <= param[1]);
+                }
+            });
+
+        }
+
+        function initGrid() {
+            $('.grid').dataTable({
+                bJQueryUI: true,
+                "oLanguage": {
+                    "sUrl": '@Url.Content("~/Scripts/DataTables-1.9.0/media/js/jquery.datatables." + System.Threading.Thread.CurrentThread.CurrentUICulture.ToString() + ".txt").ToAbsoluteUrl()'
+                }
+
+            });            
+        }
+
+        $(document).ready(function () {
+            initGlobalization();
+            initDatepickers();
+            initGrid();
+        });
+
+    </script>
+</head>
+<body id="page">
+    <hgroup class="SelectedSchedulerContainer">
+        @{ Html.RenderPartial("SelectedScheduler", QuartzMaster.Data.QuartzRemoting.RemoteSchedulerRepository.Instance.SchedulersInfo); }
+    </hgroup>
+    <div class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+        <nav title="Main Navigation">
+            <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+                @Html.MenuItem("List", "Overview", "ui-state-default ui-corner-top",
+                                           "ui-state-default ui-corner-top ui-tabs-selected ui-state-active",
+                                                             Html.GlobalResource<string>("QuartzMaster", "MenuItemOverview"), "li")
+                @Html.MenuItem("List", "Jobs", "ui-state-default ui-corner-top",
+                                                    "ui-state-default ui-corner-top ui-tabs-selected ui-state-active",
+                                                             Html.GlobalResource<string>("QuartzMaster", "MenuItemJobs"), "li",
+                                                             isVisible: Session.KeyExists(QuartzMaster.Constants.SchedulerInstanceKey),
+                                                                                        routeValues: new { id = Session[QuartzMaster.Constants.SchedulerInstanceKey] })
+                @Html.MenuItem("List", "Triggers", "ui-state-default ui-corner-top",
+                                                    "ui-state-default ui-corner-top ui-tabs-selected ui-state-active",
+                                                                               Html.GlobalResource<string>("QuartzMaster", "MenuItemTriggers"), "li",
+                                                                               isVisible: Session.KeyExists(QuartzMaster.Constants.SchedulerInstanceKey),
+                                                                                        routeValues: new { id = Session[QuartzMaster.Constants.SchedulerInstanceKey] })
+                @Html.MenuItem("List", "Listeners", "ui-state-default ui-corner-top",
+                                                    "ui-state-default ui-corner-top ui-tabs-selected ui-state-active",
+                                                                                Html.GlobalResource<string>("QuartzMaster", "MenuItemListeners"), "li",
+                                                                                isVisible: Session.KeyExists(QuartzMaster.Constants.SchedulerInstanceKey),
+                                                                                        routeValues: new { id = Session[QuartzMaster.Constants.SchedulerInstanceKey] })
+            </ul>
+        </nav>
+        <section class="ui-tabs-panel ui-widget-content ui-corner-bottom body-container">
+            @RenderBody()
+        </section>
+    </div>
+    <footer id="pageFooter">
+        <!--begin master footer -->
+        <div class="line">
+        </div>
+        <h4 class="stylishHeader">@Html.Raw(string.Format("{0} {1} {2}", "&copy;", DateTime.Now.Year, "QuartzMaster Dashboard"))</h4>
+        <a href="http://www.w3.org/html/logo/" class="nobg">
+            <img src="http://www.w3.org/html/logo/badge/html5-badge-h-connectivity-css3-device-graphics-multimedia-performance-semantics-storage.png"
+                width="357" height="64" alt="HTML5 Powered with Connectivity / Realtime, CSS3 / Styling, Device Access, Graphics, 3D &amp; Effects, Multimedia, Performance &amp; Integration, Semantics, and Offline &amp; Storage"
+                title="HTML5 Powered with Connectivity / Realtime, CSS3 / Styling, Device Access, Graphics, 3D &amp; Effects, Multimedia, Performance &amp; Integration, Semantics, and Offline &amp; Storage">
+        </a>
+    </footer><!--end master footer -->
+    @RenderSection("scripts", false)
+</body>
+</html>

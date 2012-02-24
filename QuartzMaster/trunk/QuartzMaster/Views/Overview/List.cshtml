@@ -1,0 +1,19 @@
+﻿@using QuartzMaster.Base.Helpers
+@using MvcContrib.UI.Grid
+@model IEnumerable<QuartzMaster.Data.SchedulerInfo>
+
+@{
+    ViewBag.Title = Html.LocalResource<string>(VirtualPath, "PageTitle");
+}
+
+<h3>@Html.LocalResource(VirtualPath, "PageTitle")</h3>
+    
+@Html.Grid(Model).AutoGenerateColumns().Columns(column =>{
+    column.For(m => Html.ActionLink(Html.LocalResource<string>(VirtualPath, "DashboardLink"),
+        "Dashboard", new { id = m.SchedulerInstanceId})).
+            Sortable(false)
+            .Named(Html.LocalResource<string>(VirtualPath, "DashboardLinkHeader"));
+})
+
+
+

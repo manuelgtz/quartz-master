@@ -1,0 +1,3 @@
+﻿@model dynamic
+@Html.DisplayText(((Model is DateTime) && ((DateTime)Model) != null) ? (((DateTime)Model).ToShortDateString() + " " + ((DateTime)Model).ToShortTimeString()) : "")
+

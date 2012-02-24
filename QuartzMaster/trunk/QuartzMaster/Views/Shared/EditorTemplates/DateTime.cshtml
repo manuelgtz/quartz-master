@@ -1,0 +1,2 @@
+﻿@model dynamic
+@Html.TextBox(ViewData.TemplateInfo.HtmlFieldPrefix, ( (Model is DateTime) && ((DateTime)Model) != null ) ? (((DateTime)Model).ToShortDateString() + " " + ((DateTime)Model).ToShortTimeString()) : "", new { Class = "datetime" })
