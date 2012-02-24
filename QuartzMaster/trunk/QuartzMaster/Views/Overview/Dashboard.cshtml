@@ -1,0 +1,14 @@
+﻿@using QuartzMaster.Base.Helpers
+@using MvcContrib.UI.Grid
+
+@model QuartzMaster.Models.DashboardModel
+
+@{
+    ViewBag.Title = Html.LocalResource(VirtualPath, "PageTitle");
+}
+ 
+<h3>@Html.LocalResource(VirtualPath, "PageTitle") - @Model.SchedulerInfo.SchedulerName</h3>
+
+
+@* @Html.Grid(Model.GetTriggers()).AutoGenerateColumns() *@
+

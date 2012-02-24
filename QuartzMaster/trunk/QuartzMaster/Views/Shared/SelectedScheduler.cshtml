@@ -1,0 +1,15 @@
+﻿@using QuartzMaster.Base.Helpers
+@using QuartzMaster
+@model IEnumerable<QuartzMaster.Data.SchedulerInfo>
+
+
+        
+@if (Session.KeyExists(Constants.SchedulerInstanceKey))
+{ 
+    <h5>@String.Format(Html.
+             LocalResource<string>(VirtualPath, "CurrentSelectedSchedulerStr"),
+                Session[QuartzMaster.Constants.SchedulerInstanceKey]) | 
+        @Html.ActionLink(Html.LocalResource<string>(VirtualPath, "SchedulerSelectionLink"),
+            "ClearSchedulerSelection", "Overview")
+    </h5>       
+}
