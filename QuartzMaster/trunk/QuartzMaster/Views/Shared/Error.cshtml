@@ -1,9 +1,9 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
-
+﻿@using QuartzMaster.Base.Helpers
+@model System.Web.Mvc.HandleErrorInfo
 @{
     ViewBag.Title = "Error";
 }
-
-<h2>
-    Sorry, an error occurred while processing your request.
-</h2>
+<section>
+    <img alt="Alert Icon" src="@Url.Content("~/images/alert.png")"/>
+    <h1>@Html.LocalResource(VirtualPath, "ErrorSorryString")</h1>
+</section>

@@ -63,8 +63,12 @@ namespace QuartzMaster.Data.QuartzRemoting
 
             foreach (SchedulerInstanceInfoElement schedulerInfo in DataLayerConfiguration.Instance.SchedulerInstances)
             {
-                QuartzRemote remoteScheduler = new QuartzRemote(schedulerInfo.Name, schedulerInfo.Url);
-                remoteSchedulers.Add(remoteScheduler);
+                try
+                {
+                    QuartzRemote remoteScheduler = new QuartzRemote(schedulerInfo.Name, schedulerInfo.Url);
+                    remoteSchedulers.Add(remoteScheduler);
+                }
+                catch (Exception){ }
             }
             
             Schedulers = remoteSchedulers.ToArray();
