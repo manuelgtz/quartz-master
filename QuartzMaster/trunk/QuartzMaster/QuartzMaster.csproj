@@ -191,6 +191,7 @@
     <Content Include="Content\DataTables-1.9.0\extras\TableTools\media\images\xls_hover.png" />
     <Content Include="Content\DataTables-1.9.0\extras\TableTools\media\swf\copy_cvs_xls.swf" />
     <Content Include="Content\DataTables-1.9.0\extras\TableTools\media\swf\copy_cvs_xls_pdf.swf" />
+    <Content Include="Content\DataTables-1.9.0\media\css\jquery.dataTables-rtl.css" />
     <Content Include="Content\DataTables-1.9.0\media\css\demo_page.css" />
     <Content Include="Content\DataTables-1.9.0\media\css\demo_table.css" />
     <Content Include="Content\DataTables-1.9.0\media\css\demo_table_jui.css" />
@@ -222,6 +223,7 @@
     <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui-rtl.css" />
     <Content Include="Content\themes\base\jquery-ui.css" />
     <Content Include="Content\themes\base\jquery.ui.accordion.css" />
     <Content Include="Content\themes\base\jquery.ui.all.css" />
@@ -265,13 +267,14 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
-    <Content Include="css\Html5Reset.css" />
-    <Content Include="css\ltr-content.css" />
-    <Content Include="css\Mobile.css" />
-    <Content Include="css\rtl-content.css" />
+    <Content Include="Content\Html5Reset.css" />
+    <Content Include="Content\ltr-content.css" />
+    <Content Include="Content\Mobile.css" />
+    <Content Include="Content\rtl-content.css" />
     <Content Include="Global.asax" />
     <Content Include="images\bg.jpg" />
     <Content Include="images\blue-gradient.png" />
+    <Content Include="images\facicon.ico" />
     <Content Include="Scripts\DataTables-1.9.0\docs\media\js\doc.js" />
     <Content Include="Scripts\DataTables-1.9.0\docs\media\js\jquery.js" />
     <Content Include="Scripts\DataTables-1.9.0\docs\media\js\shBrushJScript.js" />
@@ -328,6 +331,7 @@
     <Content Include="Scripts\jquery-ui-1.8.17.min.js" />
     <Content Include="Scripts\jquery-ui-i18n.js" />
     <Content Include="Scripts\jquery-ui-i18n.min.js" />
+    <Content Include="Scripts\jquery.globalize\cultures\globalize.culture.en.js" />
     <Content Include="Scripts\jquery.globalize\cultures\globalize.culture.af-ZA.js" />
     <Content Include="Scripts\jquery.globalize\cultures\globalize.culture.af.js" />
     <Content Include="Scripts\jquery.globalize\cultures\globalize.culture.am-ET.js" />
@@ -699,7 +703,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="css\Site.css" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -769,6 +772,18 @@
     <Content Include="Views\Shared\SelectedScheduler.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Jobs\List.cshtml" />
+    <Content Include="Views\Listeners\List.cshtml" />
+    <Content Include="Views\Triggers\CronTriggerEdit.cshtml" />
+    <Content Include="Views\Triggers\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\App_LocalResources\SelectedScheduler.cshtml.he.resx" />
+    <Content Include="Views\Shared\App_LocalResources\SelectedScheduler.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Triggers\App_LocalResources\List.cshtml.he.resx" />
+    <Content Include="Views\Triggers\App_LocalResources\List.cshtml.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

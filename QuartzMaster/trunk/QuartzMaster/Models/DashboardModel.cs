@@ -19,7 +19,8 @@ namespace QuartzMaster.Models
         {
             SchedulerInfo = RemoteSchedulerRepository.Instance.SchedulersInfo.First(sched => sched.SchedulerInstanceId.Equals(schedulerId, StringComparison.OrdinalIgnoreCase));
             Triggers = RemoteSchedulerRepository.Instance.Schedulers.
-                            First(sched => sched.Scheduler.SchedulerInstanceId.Equals(schedulerId, StringComparison.OrdinalIgnoreCase)).GetTriggers();
+                            First(sched => sched.Scheduler.SchedulerInstanceId.
+                                Equals(schedulerId, StringComparison.OrdinalIgnoreCase)).GetTriggers();
         }
     }
 }
