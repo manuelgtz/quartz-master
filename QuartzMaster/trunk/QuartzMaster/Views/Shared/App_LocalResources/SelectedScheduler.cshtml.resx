@@ -117,13 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BackToIndexLink" xml:space="preserve">
-    <value>חזרה לתפריט ראשי</value>
+  <data name="CurrentSelectedSchedulerStr" xml:space="preserve">
+    <value>Administrating scheduler with instance id {0}</value>
   </data>
-  <data name="PageTitle" xml:space="preserve">
-    <value>תפריט מנהל תהליכים</value>
-  </data>
-  <data name="TriggersTitle" xml:space="preserve">
-    <value>מודולי הפעלה</value>
+  <data name="SchedulerSelectionLink" xml:space="preserve">
+    <value>Back to scheduler selection</value>
   </data>
 </root>

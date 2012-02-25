@@ -114,3 +114,14 @@ textarea
 {
     display: none;
 }
+
+.menu-item
+{
+    cursor:pointer !important;
+	*cursor:hand !important;
+}
+nav a
+{
+    cursor:pointer !important;
+	*cursor:hand !important;
+}

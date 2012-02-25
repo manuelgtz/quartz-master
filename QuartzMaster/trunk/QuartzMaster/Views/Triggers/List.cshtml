@@ -1,0 +1,18 @@
+﻿@using QuartzMaster.Base.Helpers
+@using MvcContrib.UI.Grid
+
+@model QuartzMaster.Models.TriggersModel
+
+@{
+    ViewBag.Title = Html.LocalResource(VirtualPath, "PageTitle");
+}
+
+<h3>@Html.LocalResource(VirtualPath, "PageTitle")</h3>
+
+<div>
+    @Html.Grid(Model.SimpleTriggers).AutoGenerateColumns()
+</div>
+
+<div>
+    @Html.Grid(Model.CronTriggers).AutoGenerateColumns()
+</div>

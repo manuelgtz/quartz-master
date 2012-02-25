@@ -9,6 +9,6 @@
  
 <h3>@Html.LocalResource(VirtualPath, "PageTitle") - @Model.SchedulerInfo.SchedulerName</h3>
 
-
-@* @Html.Grid(Model.GetTriggers()).AutoGenerateColumns() *@
+<h5>@Html.LocalResource(VirtualPath, "TriggersTitle")</h5>
+@Html.Grid(Model.Triggers).AutoGenerateColumns() 
 
