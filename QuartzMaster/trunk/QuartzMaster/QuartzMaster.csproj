@@ -14,7 +14,7 @@
     <AssemblyName>QuartzMaster</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -272,6 +272,8 @@
     <Content Include="Content\Mobile.css" />
     <Content Include="Content\rtl-content.css" />
     <Content Include="Global.asax" />
+    <Content Include="images\back.png" />
+    <Content Include="images\alert.png" />
     <Content Include="images\bg.jpg" />
     <Content Include="images\blue-gradient.png" />
     <Content Include="images\facicon.ico" />
@@ -785,6 +787,12 @@
     <Content Include="Views\Triggers\App_LocalResources\List.cshtml.he.resx" />
     <Content Include="Views\Triggers\App_LocalResources\List.cshtml.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\App_LocalResources\Error.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\App_LocalResources\Error.cshtml.he.resx" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -800,12 +808,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>10659</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost:10659/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -11,7 +11,7 @@ using System.Collections;
 using QuartzMaster.Models;
 
 namespace QuartzMaster.Controllers
-{
+{    
     public class OverviewController : BaseController
     {       
         public OverviewController() : base()

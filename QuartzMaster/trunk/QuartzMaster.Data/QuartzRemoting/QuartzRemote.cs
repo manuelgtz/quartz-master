@@ -17,6 +17,7 @@ namespace QuartzMaster.Data.QuartzRemoting
         public string SchedulerName { get;private set; }
         public string SchedulerDescription { get; private set; }
         public Uri InstanceUrl { get; private set; }
+        public bool IsOnline { get; private set; }
 
         public QuartzRemote(string instanceName,Uri instanceUrl,string schedulerDescription = "")
         {
@@ -25,9 +26,18 @@ namespace QuartzMaster.Data.QuartzRemoting
             
             properties["quartz.scheduler.proxy"] = "true";
             properties["quartz.scheduler.proxy.address"] = instanceUrl.ToString();
-            InstanceUrl = instanceUrl;
-            ISchedulerFactory sf = new StdSchedulerFactory(properties);
-            Scheduler = sf.GetScheduler();
+            try
+            {
+                InstanceUrl = instanceUrl;
+                ISchedulerFactory sf = new StdSchedulerFactory(properties);
+                Scheduler = sf.GetScheduler();
+                IsOnline = true;
+            }
+            catch (Exception)
+            {
+                Scheduler = null;
+                IsOnline = false;
+            }
         }
 
         public IEnumerable<BaseTrigger> GetTriggetsOfJob(string jobName,string jobGroupName)
